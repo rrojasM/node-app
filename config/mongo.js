@@ -1,22 +1,20 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
-
-
 
 const databaseConnect = () => {
 
-    const DB = process.env.DB_URI;
+    const db = process.env.URL_MONGO;
 
-    mongoose.connect(DB, {
+    mongoose.connect(db, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }, (err, res) => {
-        if (!err) {
-            console.log("MONGODB ONLINE");
-        } else {
-            console.log("MONGODB ERROR", err);
-        }
-    });
+    },
+        (err, res) => {
+            if (!err) {
+                console.log("MONGODB ONLINE");
+            } else {
+                console.log("MONGODB ERROR", err);
+            }
+        });
 
 }
 
