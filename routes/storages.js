@@ -1,13 +1,9 @@
 const express = require('express');
-
 const router = express.Router();
+const uploadMiddleware = require('../utils/handleStorage');
+const { createItem } = require('../controllers/storagesController');
 
-//TODO: http://localhost/tracks GET POST DELETE PUT
-
-router.get("/", (req, res) => {
-    const data = ["Hola", "Storages"];
-    res.send({ data })
-});
+router.post("/", uploadMiddleware.single("myFile"), createItem);
 
 
 module.exports = router;
