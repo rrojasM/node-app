@@ -10,9 +10,9 @@ const databaseConnect = () => {
     },
         (err, res) => {
             if (!err) {
-                console.log("MONGODB ONLINE");
+                console.log("MONGO DATABASE IS ONLINE");
             } else {
-                console.log("MONGODB ERROR", err);
+                console.log("MONGO DATABASE ERROR", err);
             }
         });
 
