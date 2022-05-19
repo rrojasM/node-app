@@ -34,7 +34,6 @@ const createItem = async (req, res) => {
         url: `${PUBLIC_URL}/${file.filename}`
     }
     const data = await storagesModel.create(fileData);
-
     res.send({ data })
 }
 

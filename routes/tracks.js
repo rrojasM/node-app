@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { getItems,
+const {
+    getItems,
     getItem,
     createItem,
     updateItem,
-    deleteItem } = require('../controllers/tracksController');
-
-//TODO: http://localhost/tracks GET POST DELETE PUT
+    deleteItem
+} = require('../controllers/tracksController');
+const { validatorCreateItem } = require('../validators/tracks')
 
 router.get("/", getItems);
 router.get("/:id", getItem);
-router.post("/", createItem);
+router.post("/", validatorCreateItem, createItem);
 router.get("/", updateItem);
 router.get("/", deleteItem);
 
