@@ -1,6 +1,6 @@
-const express = require('express');
-
+const { matchedData } = require('express-validator');
 const { tracksModel } = require('../models');
+const { handleHttpError } = require('../utils/handleError');
 
 /**
  * Obtener una lista
@@ -8,9 +8,12 @@ const { tracksModel } = require('../models');
  * @param {*} res 
  */
 const getItems = async (req, res) => {
-
-    const data = await tracksModel.find({})
-    res.send({ data })
+    try {
+        const data = await tracksModel.find({})
+        res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "ERROR EN OBTENER ELEMENTOS")
+    }
 }
 
 
@@ -29,12 +32,14 @@ const getItem = (req, res) => {
  * @param {*} res 
  */
 const createItem = async (req, res) => {
-    const { body } = req;
-    console.log({ body });
+    try {
+        const body = matchedData(req);
+        const data = await tracksModel.create(body);
+        res.send({ data })
 
-    const data = await tracksModel.create(body);
-
-    res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "OCURRIO UN ERROR AL CREAR UN TRACK")
+    }
 }
 
 /**
