@@ -7,14 +7,10 @@ const {
     updateItem,
     deleteItem
 } = require('../controllers/tracksController');
-const { validatorCreateItem } = require('../validators/tracks')
+const { validatorCreateItem } = require('../validators/tracks');
+const customHeader = require('../middleware/customHeader')
 
 router.get("/", getItems);
-router.get("/:id", getItem);
-router.post("/", validatorCreateItem, createItem);
-router.get("/", updateItem);
-router.get("/", deleteItem);
-
-
+router.post("/", validatorCreateItem,customHeader, createItem);
 
 module.exports = router;
