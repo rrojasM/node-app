@@ -41,14 +41,18 @@ const getItem = async (req, res) => {
  * @param {*} res 
  */
 const createItem = async (req, res) => {
-    const { body, file } = req;
-    console.log({ body, file });
-    const fileData = {
-        filename: file.filename || undefined,
-        url: `${PUBLIC_URL}/${file.filename}`
+    try {
+        const { body, file } = req;
+        console.log({ body, file });
+        const fileData = {
+            filename: file.filename || undefined,
+            url: `${PUBLIC_URL}/${file.filename}`
+        }
+        const data = await storagesModel.create(fileData);
+        res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "OCURRIO UN ERROR AL CREAR UN ELEMENTO STORAGE")
     }
-    const data = await storagesModel.create(fileData);
-    res.send({ data })
 }
 
 /**
