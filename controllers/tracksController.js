@@ -1,4 +1,4 @@
-const { matchedData } = require('express-validator');
+const { matchedData, body } = require('express-validator');
 const { tracksModel } = require('../models');
 const { handleHttpError } = require('../utils/handleError');
 
@@ -22,8 +22,15 @@ const getItems = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const getItem = (req, res) => {
-
+const getItem = async (req, res) => {
+    try {
+        req = matchedData(req);
+        const { id } = req;
+        const data = await tracksModel.findById(id);
+        res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "ERROR AL OBTENER EL ELEMENTO")
+    }
 }
 
 /**
@@ -47,7 +54,15 @@ const createItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = (req, res) => {
+const updateItem = async (req, res) => {
+    try {
+        const { id, ...body } = matchedData(req);
+        const data = await tracksModel.findOneAndUpdate(id, body);
+        res.send({ data })
+
+    } catch (error) {
+        handleHttpError(res, "OCURRIO UN ERROR AL ACTUALIZAR UN TRACK")
+    }
 
 }
 
@@ -56,7 +71,15 @@ const updateItem = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItem = (req, res) => {
+const deleteItem = async (req, res) => {
+    try {
+        req = matchedData(req);
+        const { id } = req;
+        const data = await tracksModel.deleteOne({_id: id});
+        res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "ERROR AL ELIMINAR  EL ELEMENTO")
+    }
 
 }
 
