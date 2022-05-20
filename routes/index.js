@@ -4,11 +4,10 @@ const router = express.Router();
 
 const PATH_ROUTES = __dirname;
 
-/* const a = fs.readdirSync(PATH_ROUTES)
-console.log({a}); */
+const a = fs.readdirSync(PATH_ROUTES)
+console.log({ a });
 
 const removeExtension = (fileName) => {
-    //TODO:TACKS.JS
     return fileName.split('.').shift();
 }
 
