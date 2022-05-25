@@ -1,6 +1,7 @@
 const { matchedData } = require('express-validator')
 const { usersModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError")
+const { encrypt, compare } = require('../utils/handlePassword');
 
 /**
  * Obtener una lista
@@ -83,11 +84,24 @@ const deleteItem = async (req, res) => {
 
 }
 
+const registerUser = async (req, res) => {
+    try {
+        req = matchedData(req);
+        const password = await encrypt(req.password);
+        const body = { ...req, password };
+        const data = await usersModel.create(body);
+        res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "ERROR AL CREAR UN USUAR", error)
+    }
+}
+
 
 module.exports = {
     getItems,
     getItem,
     createItem,
     updateItem,
-    deleteItem
+    deleteItem,
+    registerUser
 }
