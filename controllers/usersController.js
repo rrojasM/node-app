@@ -85,6 +85,8 @@ const deleteItem = async (req, res) => {
 
 }
 
+
+//cambiar despues a authcontroller
 const registerUser = async (req, res) => {
     try {
         req = matchedData(req);
@@ -99,7 +101,7 @@ const registerUser = async (req, res) => {
 
         res.send({ data })
     } catch (error) {
-        handleHttpError(res, "ERROR AL CREAR UN USUAR", error)
+        handleHttpError(res, "ERROR AL CREAR UN USUARIO", error)
     }
 }
 

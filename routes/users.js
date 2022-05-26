@@ -1,7 +1,6 @@
 const express = require('express');
 const { getItems, createItem, getItem, updateItem, deleteItem, registerUser } = require('../controllers/usersController');
 const { validatorCreateItem, validatorGetItem } = require('../validators/users');
-
 const router = express.Router();
 
 router.get("/", getItems);
