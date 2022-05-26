@@ -2,6 +2,7 @@ const { matchedData } = require('express-validator')
 const { usersModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError")
 const { encrypt, compare } = require('../utils/handlePassword');
+const { tokenSign } = require('../utils/handleJwt');
 
 /**
  * Obtener una lista
@@ -89,7 +90,13 @@ const registerUser = async (req, res) => {
         req = matchedData(req);
         const password = await encrypt(req.password);
         const body = { ...req, password };
-        const data = await usersModel.create(body);
+        const dataUser = await usersModel.create(body);
+
+        const data = {
+            token: await tokenSign(dataUser),
+            user: dataUser
+        }
+
         res.send({ data })
     } catch (error) {
         handleHttpError(res, "ERROR AL CREAR UN USUAR", error)
