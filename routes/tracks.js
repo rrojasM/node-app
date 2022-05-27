@@ -8,12 +8,13 @@ const {
     deleteItem
 } = require('../controllers/tracksController');
 const { validatorCreateItem, validatorGetItem } = require('../validators/tracks');
-const customHeader = require('../middleware/customHeader')
+const customHeader = require('../middleware/customHeader');
+const authMiddleware = require('../middleware/session')
 
 /**
  * Ruta para listar elementos
  */
-router.get("/", getItems);
+router.get("/",authMiddleware, getItems);
 
 /**
  * Obtener detalle
