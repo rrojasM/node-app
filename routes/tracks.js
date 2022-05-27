@@ -8,7 +8,6 @@ const {
     deleteItem
 } = require('../controllers/tracksController');
 const { validatorCreateItem, validatorGetItem } = require('../validators/tracks');
-const customHeader = require('../middleware/customHeader');
 const authMiddleware = require('../middleware/session')
 
 /**
