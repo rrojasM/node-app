@@ -18,7 +18,7 @@ const registerUserController = async (req, res) => {
 
         res.send({ data })
     } catch (error) {
-        handleHttpError(res, "ERROR AL CREAR UN USUAR", error)
+        handleHttpError(res, "ERROR AL CREAR UN USUARIO", error)
     }
 
 }
