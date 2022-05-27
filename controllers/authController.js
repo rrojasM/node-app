@@ -21,11 +21,8 @@ const registerUserController = async (req, res) => {
             token: await tokenSign(dataUser),
             user: dataUser
         }
-
         res.send({ data })
-        console.log({ data });
     } catch (error) {
-        console.log("ERROR =====>", error);
         handleHttpError(res, "ERROR AL CREAR UN USUARIO");
     }
 
