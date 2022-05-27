@@ -1,7 +1,6 @@
 const { check } = require('express-validator');
 const validationResults = require('../utils/handleValidator');
 
-
 const validatorCreateItem = [
     check("name").exists().notEmpty(),
     check("album").exists().notEmpty(),
